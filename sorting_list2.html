@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+	<title>Sorting List </title>
+	<link rel = "stylesheet" href = "SortableList.css"/>
+</head>
+<body>
+	<h1>Sorting HTML List </h1>
+	<ul id = "mylist">
+		<li> Red </li>
+		<li> Green </li>
+		<li> Orange </li>
+		<li> Black </li>
+		<li> White </li>
+		<li> Blue </li>
+		<li> Yellow </li>
+		<li> Pink </li>
+	</ul>
+	<!--Creating a button to arrange the list items in ascending order -->
+	<button id = "btn1" onclick = "ascendingList()"> Sort By - Ascending</button>
+	<!--Creating a button to arrange list items in descending order -->
+	<button id = "btn2" onclick = "descendingList()">Sort By - Descending </button>
+	<script>
+	const ascendingButton = document.getElementById("btn1");
+	const descendingButton = document.getElementById("btn2");
+	function ascendingList() {
+		var list, i, switching, ShouldSwitch, b;
+		list = document.getElementById("mylist");
+		switching = true;
+		/* Make a loop that will continue untilno switching has been done: */
+		while (switching) {
+			// start by saying: no switching is done:
+			switching = false;
+			b = list.getElementsByTagName("li");
+			// Loop through all list-items:
+			for (i = 0; i < (b.length - 1); i++) {
+				// start by saying there should be no switching:
+				ShouldSwitch = false;
+				/* check if the next item shouldswitch place with the current item: */
+				if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+				/* if next item is alphabeticallylower than current item, mark as a switchand break the loop: */
+					ShouldSwitch = true;
+					break;
+				}
+			}
+			if (ShouldSwitch) {
+				/* If a switch has been marked, make the switchand mark the switch as done: */
+				b[i].parentNode.insertBefore(b[i + 1], b[i]);
+				switching = true;
+			}
+		}
+		/* Hide the ascending button and display the descending button */
+		ascendingButton.style.display = "none";
+		descendingButton.style.display = "block";
+	};
+
+	//Creating a function for descending button
+	function descendingList() {
+		var list, i, switching, ShouldSwitch, b;
+		list = document.getElementById("mylist");
+		switching = true;
+		while(switching) {
+			switching = false;
+			b = list.getElementsByTagName("li");
+			for (i = 0; i < (b.length -1); i++) {
+				ShouldSwitch = false;
+				if (b[i].innerHTML.toLowerCase() < b[i + 1].innerHTML.toLowerCase()) {
+				ShouldSwitch = true;
+					break;
+				}
+			}
+			if (ShouldSwitch) {
+				b[i].parentNode.insertBefore(b[i + 1], b[i]);
+				switching = true;
+			}
+		}
+		/* Hiding the descending button and displaying  the ascending button */
+		ascendingButton.style.display = "block";
+		descendingButton.style.display = "none";
+	};
+	</script>
+</body>
+</html>
